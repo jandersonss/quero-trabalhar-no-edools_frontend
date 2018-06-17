@@ -1,0 +1,48 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { GitHubService } from '../services/git-hub.service';
+
+@Component({
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
+})
+export class UserComponent implements OnInit {
+  public repositories: any[];
+  public user: any;
+  constructor(private route: ActivatedRoute, private gitHubService: GitHubService) {
+    this.repositories = [];
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.getUser(params);
+      this.getRepositories(params);
+    });
+  }
+
+  getUser(params) {
+    this.gitHubService
+      .getUser(params.login)
+      .subscribe((data) => {
+        this.user = data;
+      }, (err) => console.error(err));
+  }
+
+  /**
+   * Consulta repositórios do usuário
+   * @param params
+   */
+  getRepositories(params) {
+    this.gitHubService
+      .getUserRepositories(params.login)
+      .subscribe((data: any[]) => {
+        this.repositories = data;
+      }, (err) => {
+        console.error(err);
+      });
+  }
+
+
+
+}

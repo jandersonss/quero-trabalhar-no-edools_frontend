@@ -1,0 +1,23 @@
+<div class="container" *ngIf="user">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="card">
+        <img class="card-img-top" [src]="user.avatar_url" [alt]="user.login">
+        <div class="card-body">
+          <h4 class="card-title">
+            {{user.name}}
+          </h4>
+          <h5 class="card-subtitle">
+            {{user.login}}
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="alert alert-warning" *ngIf="repositories.length===0">Nenhum resultado encontrado.</div>
+        <div class="card-columns" >
+          <app-repository *ngFor="let repo of repositories" [repository]="repo" ></app-repository>
+        </div>
+    </div>
+  </div>
+</div>

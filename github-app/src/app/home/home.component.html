@@ -1,0 +1,31 @@
+<div class="container">
+  <app-page>
+    <app-page-header>
+      <form name="formSearchUser" class="form-horizontal " (ngSubmit)="searchUser()" novalidate>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="input-user">@</span>
+          </div>
+          <input required minlength="3" type="text" class="form-control" name="userLogin" [(ngModel)]="dados.userLogin" placeholder="Login do Usuário"
+            aria-label="Login do Usuário" aria-describedby="input-user">
+          <div class="input-group-append">
+            <button (click)="searchUser()" class="btn btn-success" type="submit">Buscar Usuário</button>
+          </div>
+        </div>
+      </form>
+    </app-page-header>
+    <app-page-content>
+      <div *ngIf="!dados.userList || dados.userList.length===0" class="alert alert-warning">Nenhum resultado encontrado.</div>
+      <div class="card-columns">
+        <div class="card" *ngFor="let user of dados.userList">
+          <img class="card-img-top" [src]="user.avatar_url" [alt]="user.login">
+          <div class="card-body">
+            <h5 class="card-title">{{user.login}}</h5>
+            <a href="/user/{{user.login}}" class="btn btn-block btn-primary">Explorar repositórios</a>
+          </div>
+        </div>
+      </div>
+    </app-page-content>
+  </app-page>
+
+</div>
