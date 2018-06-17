@@ -26,6 +26,9 @@
               <li class="nav-item">
                 <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active': tab=='issues'}" (click)="tab='issues'">Issues</a>
               </li>
+              <li class="nav-item">
+                <a [href]="repository.html_url" target="_blank" class="nav-link">Abrir repositório no GitHub</a>
+              </li>
             </ul>
           </div>
         </app-page-header>
