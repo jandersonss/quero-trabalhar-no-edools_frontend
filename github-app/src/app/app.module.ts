@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -18,7 +18,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { RequestInterceptor } from './request-interceptor';
 import { RepositoryDetailComponent } from './repository-detail/repository-detail.component';
-import {MarkdownToHtmlModule} from 'markdown-to-html-pipe';
+import { MarkdownToHtmlModule } from 'markdown-to-html-pipe';
 
 /** Http interceptor providers in outside-in order */
 export const httpInterceptorProviders = [
@@ -46,6 +46,7 @@ export const httpInterceptorProviders = [
     MarkdownToHtmlModule
   ],
   providers: [GitHubService, httpInterceptorProviders],
+  schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

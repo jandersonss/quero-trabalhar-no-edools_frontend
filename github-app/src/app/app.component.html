@@ -1,17 +1,29 @@
+<spinner backgroundColor="#ff0000" spinner="sk-wave" debounceDelay="100" minDuration="300">
+</spinner>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 p-3">
 	<div class="container">
-		
 		<a class="navbar-brand" href="#">
 			<i class="fab fa-github"></i> GitHub
 			<small>Explore repositórios de usuários</small>
 		</a>
-		
+		<div class="form-horizontal ">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="input-user">
+						<i class="fas fa-key"></i>
+					</span>
+				</div>
+				<input required minlength="3" type="text" class="form-control" name="userLogin" [(ngModel)]="accessToken" placeholder="Token de acesso Api Git"
+				 aria-label="Token de acesso Api Git" aria-describedby="input-user">
+				<div class="input-group-append">
+					<button class="btn btn-success" type="button" (click)="updateToken()">Atualizar Token</button>
+				</div>
+				<div class="input-group-append">
+					<a href="https://github.com/settings/tokens" target="_blank" class="btn btn-warning">Gere seu Token no GitHub</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </nav>
-<spinner 
-    [backgroundColor]="'#ff0000'"
-    spinner="sk-wave"
-    [debounceDelay]="100"
-    [minDuration]="300">
-</spinner>
 <router-outlet></router-outlet>
