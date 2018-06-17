@@ -1,0 +1,10 @@
+.app-repository-detail{
+    .issue-body{
+        overflow: auto;
+    }
+
+    .media-body{
+        max-width: calc(100% - 80px);   
+    }
+
+}

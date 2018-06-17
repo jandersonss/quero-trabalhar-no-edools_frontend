@@ -18,6 +18,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { RequestInterceptor } from './request-interceptor';
 import { RepositoryDetailComponent } from './repository-detail/repository-detail.component';
+import {MarkdownToHtmlModule} from 'markdown-to-html-pipe';
 
 /** Http interceptor providers in outside-in order */
 export const httpInterceptorProviders = [
@@ -41,7 +42,8 @@ export const httpInterceptorProviders = [
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgHttpLoaderModule
+    NgHttpLoaderModule,
+    MarkdownToHtmlModule
   ],
   providers: [GitHubService, httpInterceptorProviders],
   bootstrap: [AppComponent]

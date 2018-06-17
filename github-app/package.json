@@ -22,9 +22,10 @@
     "@angular/router": "^6.0.3",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
+    "markdown-to-html-pipe": "^1.2.4",
     "moment": "^2.22.2",
     "ng-http-loader": "^2.3.0",
-    "rxjs": "^6.0.0",
+    "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

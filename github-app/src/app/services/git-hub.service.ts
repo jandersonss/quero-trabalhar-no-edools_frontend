@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class GitHubService {
   public USER_URL = `${environment.BASE_API_URL}/users`;
+  public REPO_URL = `${environment.BASE_API_URL}/repos`;
   public SEARCH_URL = `${environment.BASE_API_URL}/search`;
 
   constructor(private http: HttpClient) {
@@ -46,10 +47,6 @@ export class GitHubService {
   }
 
   getUserRepositorie(login: string, repoName: string) {
-    return this.http.get(`${this.USER_URL}/${login}/repos/${repoName}`, {
-      params: {
-        q: login
-      }
-    });
+    return this.http.get(`${this.REPO_URL}/${login}/${repoName}`);
   }
 }

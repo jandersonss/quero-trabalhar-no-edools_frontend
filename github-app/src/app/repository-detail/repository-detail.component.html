@@ -1,3 +1,78 @@
-<p>
-  repository-detail works!
-</p>
+<div class="container app-repository-detail" *ngIf="user && repository">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="card">
+        <img class="card-img-top" [src]="user.avatar_url" [title]="user.login">
+        <div class="card-body">
+          <h4 class="card-title">
+            {{user.name}}
+          </h4>
+          <h5 class="card-subtitle">
+            {{user.login}}
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <app-page>
+        <app-page-header>
+          <span class="badge badge-secondary float-right mt-1">{{repository.language}}</span>
+          <h4 class="m-0">{{repository.full_name}}</h4>
+          <div class="pt-3">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item" *ngIf="repository.contributors && repository.contributors.length">
+                <a href="javascript:void(0);" class="nav-link " [ngClass]="{'active': tab=='contributors'}" (click)="tab='contributors'">Contribuidores</a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active': tab=='issues'}" (click)="tab='issues'">Issues</a>
+              </li>
+            </ul>
+          </div>
+        </app-page-header>
+        <app-page-content *ngIf="tab=='contributors'">
+          <div *ngIf="repository.contributors && repository.contributors.length">
+            <div class="row">
+              <div class="col-lg-2  p-3" *ngFor="let user of repository.contributors">
+                <a [routerLink]="['/user', user.login]"><img [src]="user.avatar_url" class="rounded-circle" width="70" [title]="user.login"></a>
+              </div>
+            </div>
+          </div>
+        </app-page-content>
+        <app-page-content *ngIf="tab=='issues'">
+          <div class="alert alert-warning" *ngIf="!repository.issues || repository.issues.length===0">Nenhuma issue encontrada.</div>
+          <div *ngIf="repository.issues">
+            <div class="media mb-3" *ngFor="let issue of repository.issues">
+              <img class="mr-3" width="60" [src]="issue.user.avatar_url" [title]="issue.user.login">
+              <div class="media-body mb-5">
+                <small class="badge float-right" [ngClass]="{'badge-primary': issue.state == 'open','badge-danger': issue.state == 'close'}">{{issue.state}}</small>
+                <small class="pr-3">Criada {{issue.created_at | momentDate:'fromNow'}}</small>
+                <small class="pr-3">-</small>
+                <small class="pr-3">Atualizada {{issue.updated_at | momentDate:'fromNow'}}</small>
+                <h5 class="mt-0">{{issue.title}}</h5>
+                <div class="issue-body" [innerHTML]="issue.body | MarkdownToHtml"></div>
+                <hr>
+
+                <div *ngIf="issue.commentsList" class="comments-list">
+                  <div class="media" *ngFor="let comment of issue.commentsList">
+                    <img class="mr-3" width="40" [src]="comment.user.avatar_url" [title]="comment.user.login">
+                    <div class="media-body mb-3">
+                      <small class="badge float-right" [ngClass]="{'badge-primary': comment.state == 'open','badge-danger': comment.state == 'close'}">{{comment.state}}</small>
+                      <small class="pr-3">Criada {{comment.created_at | momentDate:'fromNow'}}</small>
+                      <small class="pr-3">-</small>
+                      <small class="pr-3">Atualizada {{comment.updated_at | momentDate:'fromNow'}}</small>
+                      <div class="issue-body" [innerHTML]="comment.body | MarkdownToHtml"></div>
+                      <hr>
+                    </div>
+                  </div>
+                </div>
+
+                <button *ngIf="!issue.commentsList"  class="btn btn-outline-secondary" (click)="loadComments(issue)">
+                  <i class="fa fa-comment"></i> {{issue.comments}} Comentários</button>
+              </div>
+            </div>
+          </div>
+        </app-page-content>
+      </app-page>
+    </div>
+  </div>
+</div>
