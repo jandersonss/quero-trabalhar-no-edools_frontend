@@ -42,18 +42,18 @@ export class RepositoryDetailComponent implements OnInit {
       .subscribe((data) => {
         this.repository = data;
       }, (err) => {
-        console.error(err);
+        alert(err.message || err.error.message);
       });
     // Recupera contribuidores
     this.gitHubService
       .getUserRepositorie(params.login, `${params.repoName}/contributors`)
       .subscribe((data: any[]) => {
         if (data.length === 0) {
-          this.tab = 'issue';
+          this.tab = 'issues';
         }
         this.repository.contributors = data;
       }, (err) => {
-        console.error(err);
+        alert(err.message || err.error.message);
       });
 
     // Recupera issues
@@ -62,7 +62,7 @@ export class RepositoryDetailComponent implements OnInit {
       .subscribe((data: any[]) => {
         this.repository.issues = data;
       }, (err) => {
-        console.error(err);
+        alert(err.message || err.error.message);
       });
 
   }
@@ -76,7 +76,7 @@ export class RepositoryDetailComponent implements OnInit {
         .subscribe((data: any[]) => {
           issue.commentsList = data;
         }, (err) => {
-          console.error(err);
+          alert(err.message || err.error.message);
         });
     }
   }

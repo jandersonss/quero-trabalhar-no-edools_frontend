@@ -39,7 +39,7 @@ export class UserComponent implements OnInit {
       .subscribe((data: any[]) => {
         this.repositories = data;
       }, (err) => {
-        console.error(err);
+        alert(err.message || err.error.message);
       });
   }
 

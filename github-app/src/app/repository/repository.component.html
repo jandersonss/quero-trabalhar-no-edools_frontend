@@ -3,7 +3,7 @@
 		<span class="badge badge-dark float-right">{{repository.language}}</span>
 	</div>
 	<div class="card-body">
-		<h5 class="card-title">{{repository.name}}</h5>
+		<h5 class="card-title"><a [routerLink]="['/user', repository.owner.login, repository.name]" >{{repository.name}}</a></h5>
 		<p>{{repository.description}}</p>
 		<small>Atualizado {{repository.updated_at | momentDate:'fromNow'}}</small>
 		<hr>

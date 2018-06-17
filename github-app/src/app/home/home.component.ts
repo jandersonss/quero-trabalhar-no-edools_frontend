@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
       .subscribe((data: any) => {
         this.dados.userList = data.items;
       }, (err) => {
-        console.error(err);
+        alert(err.message || err.error.message);
       });
   }
 
