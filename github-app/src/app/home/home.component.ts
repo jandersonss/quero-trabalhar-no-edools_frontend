@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GitHubService } from '../services/git-hub.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
     userList: null
   };
 
-  constructor(private gitHubService: GitHubService) { }
+  constructor(private gitHubService: GitHubService, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
       .subscribe((data: any) => {
         this.dados.userList = data.items;
       }, (err) => {
-        alert(err.message || err.error.message);
+        this.toastr.error(err.message || err.error.message, 'Algum problema ocorrreu.');
       });
   }
 

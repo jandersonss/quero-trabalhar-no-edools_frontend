@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GitHubService } from '../services/git-hub.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-repository-detail',
@@ -13,7 +14,7 @@ export class RepositoryDetailComponent implements OnInit {
   public tab: string;
   public repository: any;
   private params: any;
-  constructor(private route: ActivatedRoute, private gitHubService: GitHubService) {
+  constructor(private route: ActivatedRoute, private gitHubService: GitHubService, private toastr: ToastrService) {
     this.repository = [];
   }
 
@@ -42,7 +43,7 @@ export class RepositoryDetailComponent implements OnInit {
       .subscribe((data) => {
         this.repository = data;
       }, (err) => {
-        alert(err.message || err.error.message);
+        this.toastr.error(err.message || err.error.message, 'Algum problema ocorrreu.');
       });
     // Recupera contribuidores
     this.gitHubService
@@ -53,7 +54,7 @@ export class RepositoryDetailComponent implements OnInit {
         }
         this.repository.contributors = data;
       }, (err) => {
-        alert(err.message || err.error.message);
+        this.toastr.error(err.message || err.error.message, 'Algum problema ocorrreu.');
       });
 
     // Recupera issues
@@ -62,7 +63,7 @@ export class RepositoryDetailComponent implements OnInit {
       .subscribe((data: any[]) => {
         this.repository.issues = data;
       }, (err) => {
-        alert(err.message || err.error.message);
+        this.toastr.error(err.message || err.error.message, 'Algum problema ocorrreu.');
       });
 
   }
@@ -76,7 +77,7 @@ export class RepositoryDetailComponent implements OnInit {
         .subscribe((data: any[]) => {
           issue.commentsList = data;
         }, (err) => {
-          alert(err.message || err.error.message);
+          this.toastr.error(err.message || err.error.message, 'Algum problema ocorrreu.');
         });
     }
   }
